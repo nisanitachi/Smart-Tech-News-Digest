@@ -19,7 +19,7 @@ feed = feedparser.parse(url)
 categorized_news = defaultdict(list)
 
 for entry in feed.entries:
-    # Use tags if available, else put under 'Uncategorized'
+   
     tags = [tag.term for tag in entry.get("tags", [])] or ["Uncategorized"]
 
     news_item = {
@@ -28,7 +28,7 @@ for entry in feed.entries:
         "link": entry.link,
         "published": entry.published,
         "fetched_at": datetime.now().isoformat(),
-        "tags": tags  # ✅ Add this line
+        "tags": tags  
     }
 
     for tag in tags:
