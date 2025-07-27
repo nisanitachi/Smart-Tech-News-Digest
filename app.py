@@ -4,30 +4,30 @@ import streamlit as st
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 
-# 🔐 Load API Key from .env
+
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
 
-# 🧠 Setup LLM (Groq)
+
 llm = ChatGroq(
     groq_api_key=groq_api_key,
-    model_name="llama3-8b-8192"  # Or use "llama3-70b-8192" if needed
+    model_name="llama3-8b-8192"  
 )
 
-# 📁 Load filtered genre-wise news
+
 with open("techcrunch_genre_filtered.json", "r", encoding="utf-8") as f:
     news_data = json.load(f)
 
-# 🎯 Get list of genres
+
 genres = list(news_data.keys())
 
-# 🖼️ Streamlit UI
+
 st.title("📰 Smart Tech News Digest (Groq LLM)")
 st.sidebar.header("📂 Choose a Tech Genre")
 
 selected_genre = st.sidebar.selectbox("Genre", sorted(genres))
 
-# ✨ Display article preview
+
 articles = news_data.get(selected_genre, [])
 
 st.markdown(f"## 📚 {selected_genre} — {len(articles)} Articles")
